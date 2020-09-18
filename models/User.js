@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    minlength: 10,
+    minlength: 8,
   },
   lastname: {
     type: String,
@@ -56,18 +56,21 @@ userSchema.pre("save", function (next) {
 
 userSchema.methods.comparePassword = function (plainPassword, cb) {
   //plainPassword 예)12345 암호화된 비밀번호
-  bcrypt.compare(plainPassword, this.password, function (err, isMath) {
-    if (err) return cb(err), cb(null, isMatch);
+  bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
   });
 };
 
 userSchema.methods.generateToken = function (cb) {
-  let user = this;
+  var user = this;
+  var token = jwt.sign(user._id.toHexString(), "secret");
 
-  //jsonwebtoken을 이용해서 token을 생성;
-
-  jwt.sign(user._id, "secretToken")
-  user.
+  user.token = token;
+  user.save(function (err, user) {
+    if (err) return cb(err);
+    cb(null, user);
+  });
 };
 
 const User = mongoose.model("User", userSchema);
