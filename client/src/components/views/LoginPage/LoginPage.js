@@ -60,7 +60,7 @@ function LoginPage(props) {
         <input type="password" value={Password} onChange={onPasswordHandler} />
 
         <br />
-        <button>Login</button>
+        <button>LOGIN</button>
       </form>
     </div>
   );
