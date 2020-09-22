@@ -36,7 +36,8 @@ function LoginPage(props) {
       }
     });
 
-    Axios.post("/api/users/login", body).then((response) => {});
+    // Axios.post("/api/users/login", body).then((response) => {});
+    // 이것때문에 리덕스의 register 할 시, login 페이지로 보내지 않은 에러일수도...
   };
 
   return (
