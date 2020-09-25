@@ -1,6 +1,7 @@
 // import Axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { registerUser } from "../../../_actions/user_action";
 
 function RegisterPage(props) {
@@ -88,4 +89,4 @@ function RegisterPage(props) {
   );
 }
 
-export default RegisterPage;
+export default withRouter(RegisterPage);
